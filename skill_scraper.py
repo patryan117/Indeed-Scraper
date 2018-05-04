@@ -36,7 +36,7 @@ pd.set_option('display.width', 1000)
 
 
 def main():
-    data = scrape(job_title="data scientist", job_location = "Boston, MA", num_pages = 10)
+    data = scrape(job_title="data architect", job_location = "Boston, MA", num_pages = 10)
     df = pd.DataFrame(data, columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text', 'Skills'])
     df = remove_duplicate_rows(df)
     print(df)
@@ -44,8 +44,8 @@ def main():
     print(cum_dict)
     something = dict_to_freq_bar(cum_dict,10,len(df))
 
-    for x in range(len(df)):
-        print(df.iloc[x,6], '/n')
+    # for x in range(len(df)):
+    #     print(df.iloc[x,6], '/n')
 
 
 
@@ -277,7 +277,9 @@ def column(matrix, i):
 
 skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ", "Perl",
                " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ",  " Tensor Flow ", " deep learning ",
-               " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", "Objective C"]
+               " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
+               " raspberry pi ", ""
+               ]
 
 # frameworks_list = ["hadoop", "spark", "aws", "hive", "nosql", "cassandra", "mysql",
                    # "mysql", "hbase", "pig", "mongodb", "git", "elasticsearch", "numpy",
