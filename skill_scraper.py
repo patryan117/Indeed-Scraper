@@ -30,11 +30,13 @@ pd.set_option('display.width', 1000)
 
 
 
-#TODO the final plot estimates seem wildly off
-#TODO the url requests now link to the off-indeed sites, and not the well structured indeed page :(
+#todo wrap as a class, so that you can pass df.name to plotly to add title
+
+# also i dont know how the link scraped is actually dead?  ( its gotta work if its scraping the text correctly)
+
 
 def main():
-    data = scrape(job_title="software engineer", job_location = "Boston, MA", num_pages = 1)
+    data = scrape(job_title="data scientist", job_location = "Boston, MA", num_pages = 10)
     df = pd.DataFrame(data, columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text', 'Skills'])
     df = remove_duplicate_rows(df)
     print(df)
@@ -42,7 +44,8 @@ def main():
     print(cum_dict)
     something = dict_to_freq_bar(cum_dict,10,len(df))
 
-
+    for x in range(len(df)):
+        print(df.iloc[x,6], '/n')
 
 
 
@@ -268,9 +271,11 @@ def incr_dict(dict, target_text):
 def column(matrix, i):
     return [row[i] for row in matrix]
 
+# Strings need to be buffered before and after with spaces (otherwise "excel" will throw errors for "ecellent", or as a verb)
+# alternatively could have facilitate using a loop to add before and after the target string
 
 
-skills_list = [" Python ", ' sql ', "hadoop", " R ", "C#", " SAS ", "C++", "Java ", "Matlab", "Hive", "Excel", "Perl",
+skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ", "Perl",
                " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ",  " Tensor Flow ", " deep learning ",
                " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", "Objective C"]
 
