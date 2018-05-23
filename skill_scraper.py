@@ -1,14 +1,12 @@
-import matplotlib.pyplot as plt
+ import matplotlib.pyplot as plt
 plt.rcdefaults()
 import requests
 import plotly
 import operator
 import operator
-# from fake_useragent import UserAgent
 import plotly.plotly as py
 import plotly.graph_objs as go
 plotly.tools.set_credentials_file(username='patryan117', api_key='sU5DfakuvEH0BEVqQE5e')
-import matplotlib.ticker as mtick
 import pandas as pd
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -17,9 +15,6 @@ import numpy as np
 import plotly.plotly as py
 import plotly.graph_objs as go
 from collections import OrderedDict
-
-
-# pandas dataframe printing settings
 
 np.set_printoptions(threshold=np.inf)
 pd.set_option('display.height', 1000)
@@ -30,49 +25,38 @@ pd.set_option('display.width', 1000)
 
 
 
-#todo wrap as a class, so that you can pass df.name to plotly to add title
-
-# also i dont know how the link scraped is actually dead?  ( its gotta work if its scraping the text correctly)
 
 
 def main():
-    data = scrape(job_title="data architect", job_location = "Boston, MA", num_pages = 10)
+    job_title = "data architect"
+    job_location = "Boston, MA"
+
+    data = scrape(job_title=job_title, job_location = job_location, num_pages = 10)
     df = pd.DataFrame(data, columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text', 'Skills'])
     df = remove_duplicate_rows(df)
-    print(df)
     cum_dict = dict_col_to_cum_dict(df,7)
-    print(cum_dict)
-    something = dict_to_freq_bar(cum_dict,10,len(df))
-
-    # for x in range(len(df)):
-    #     print(df.iloc[x,6], '/n')
+    chart1 = dict_to_freq_bar_chart(cum_dict,15,len(df), job_title)
 
 
-
-def dict_to_freq_bar(dic, limit=20, posts=1):
+def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title = "'Job Title"):
     dic_len = len(dic)
     dic = sorted(dic.items(), key=operator.itemgetter(1))
     dic = OrderedDict((tuple(dic)))
     items = list(dic.items())
     skills = []
     skill_count = []
-
     for x in range(dic_len):
         skills.append(items[x][0])
         skill_count.append(items[x][1])
 
-    skill_count=skill_count[limit:None]  #TODO first, the limit doesnt work at all, but if removed we loose all titles... idk bruh
+    skill_count=skill_count[limit:None]
     skills=skills[limit:None]
-    print(skill_count)
     skill_freq_count = []
 
-    for y in (skill_count):
+    for y in skill_count:
         skill_freq_count.append(y/posts)
 
 
-
-    print(skills)
-    print(skill_freq_count)
 
     data = [go.Bar(
         x=skill_freq_count,
@@ -81,17 +65,17 @@ def dict_to_freq_bar(dic, limit=20, posts=1):
     )]
 
     layout = go.Layout(
-        autosize=False,
-        width=500,
-        height=500,
-        margin=go.Margin(
-            l=150,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
-        xaxis=dict(range=[0, 1]
+        title='Keyword Frequency for ' + job_title + ' Job Posts:',
+        autosize=True,  # change to True to manually set sizing parameters
+        xaxis=dict(range=[0, 1],
+        # width = 500,   
+        # height = 500,
+        # margin = go.Margin(   #  change to set sizing and margins
+        # l=150,
+        # r=50,
+        # b=100,
+        # t=100,
+        # pad=4
         )
     )
 
@@ -137,8 +121,6 @@ def dict_to_bar(dict, limit=10):
             t=100,
             pad=4
         ),
-        # paper_bgcolor='#7f7f7f',
-        # plot_bgcolor='#c7c7c7'
     )
 
     fig = go.Figure(data=data, layout=layout)
@@ -278,7 +260,7 @@ def column(matrix, i):
 skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ", "Perl",
                " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ",  " Tensor Flow ", " deep learning ",
                " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
-               " raspberry pi ", ""
+               " raspberry pi "
                ]
 
 # frameworks_list = ["hadoop", "spark", "aws", "hive", "nosql", "cassandra", "mysql",
