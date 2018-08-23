@@ -1,4 +1,4 @@
- import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 plt.rcdefaults()
 import requests
 import plotly
@@ -26,12 +26,10 @@ pd.set_option('display.width', 1000)
 
 
 
-
 def main():
-    job_title = "data architect"
+    job_title = "data scientist"
     job_location = "Boston, MA"
-
-    data = scrape(job_title=job_title, job_location = job_location, num_pages = 10)
+    data = scrape(job_title=job_title, job_location = job_location, num_pages = 2)
     df = pd.DataFrame(data, columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text', 'Skills'])
     df = remove_duplicate_rows(df)
     cum_dict = dict_col_to_cum_dict(df,7)
@@ -109,6 +107,7 @@ def dict_to_bar(dict, limit=10):
         y=skills,
         orientation='h'
     )]
+
 
     layout = go.Layout(
         autosize=False,
@@ -201,6 +200,7 @@ def export_as_csv(df):
     df.to_csv("jobs_matrix.csv")
 
 
+#TODO use the title() to capitalize the final outputs
 
 
 
@@ -253,8 +253,7 @@ def incr_dict(dict, target_text):
 def column(matrix, i):
     return [row[i] for row in matrix]
 
-# Strings need to be buffered before and after with spaces (otherwise "excel" will throw errors for "ecellent", or as a verb)
-# alternatively could have facilitate using a loop to add before and after the target string
+
 
 
 skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ", "Perl",
@@ -269,7 +268,6 @@ skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "
 
 # academics_list = [" PhD ", " Bachelor's ", " Bachelors ", " Master's ", "Masters", "publications", "Journal", "statistics",
 #                   "Mathematics", ]
-
 
 
 
@@ -356,7 +354,7 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
 
         salaries = []
         for td in soup.find_all(name="td", attrs={"class" : "snip"}):           #TODO figure out how to only grab the "snip" elements in the job posts
-            try:                                                                # Its gonna be pretty tricky, since not all posts seem to have this category (might need to be removed entirely)
+            try:
                 for snip in soup.find_all(name="span", attrs={"class": "no-wrap"}):
                     if "date" in snip.text:
                         salaries.append("No Salary Provided")
