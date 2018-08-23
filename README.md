@@ -1,2 +1,2 @@
 # Indeed-Scraper
-Scrapes indeed and returns market information, based on job_title and location inputs
+Stand-alone script to scrape and visualize current job market information from the website indeed.com
