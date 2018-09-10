@@ -1,2 +1,2 @@
 # Indeed-Scraper
-Stand-alone script to scrape and visualize current job market information from the website indeed.com
+Stand-alone webcrawler to scrape and visualize current job market information from the website indeed.com
