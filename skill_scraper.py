@@ -6,7 +6,7 @@ import operator
 import operator
 import plotly.plotly as py
 import plotly.graph_objs as go
-plotly.tools.set_credentials_file(username='patryan117', api_key='sU5DfakuvEH0BEVqQE5e')
+plotly.tools.set_credentials_file(username='xxxxxxxx', api_key='xxxxxxxxxxxxxxxxxxx')
 import pandas as pd
 from bs4 import BeautifulSoup
 import pandas as pd
