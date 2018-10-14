@@ -60,7 +60,7 @@ def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title = "'Job Title"):
         title='Keyword Frequency for ' + job_title + ' Job Posts:',
         autosize=True,  # change to True to manually set sizing parameters
         xaxis=dict(range=[0, 1],
-        # width = 500,   
+        # width = 500,
         # height = 500,
         # margin = go.Margin(   #  change to set sizing and margins
         # l=150,
@@ -278,7 +278,7 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
 
 
     w, h =8, 6000;
-    global job_data_matrix                                                   # Define a matrix of enough rows to hold all scraped job posts
+    global job_data_matrix
     job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
     list_spot = 0
     matrix_counter = 0
@@ -302,6 +302,8 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
         print("\nSearching URL: " + "(" +str(x+1)+ ")" + "\n" + url + "\n")
 
 
+
+
         page = requests.get(url)
         soup = BeautifulSoup(page.text, "html.parser")    # read the various components of the page, rather than as one long string.
         job_page_soup_list.append(soup)
@@ -311,6 +313,7 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
         for div in soup.find_all(name="div", attrs={"class":"row"}):
           for a in div.find_all(name="a", attrs={"data-tn-element":"jobTitle"}):
             jobs.append(a["title"])
+            print (a)
 
         dates = []
         for div in soup.find_all(name="div", attrs={"class":"row"}):
@@ -347,7 +350,7 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
 
 
         salaries = []
-        for td in soup.find_all(name="td", attrs={"class" : "snip"}):           #TODO figure out how to only grab the "snip" elements in the job posts
+        for td in soup.find_all(name="td", attrs={"class" : "snip"}):
             try:
                 for snip in soup.find_all(name="span", attrs={"class": "no-wrap"}):
                     if "date" in snip.text:
@@ -365,6 +368,7 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
         matrix_counter = 0
 
         for x in range((len(jobs))):
+            print(x)
             job_data_matrix[x + list_spot][0] = jobs[x]
             job_data_matrix[x + list_spot][1] = companies[x]
             job_data_matrix[x + list_spot][2] = salaries[x]
@@ -373,13 +377,11 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
             job_data_matrix[x + list_spot][5] = post_urls[x]
             target_url = job_data_matrix[x+list_spot][5]
 
-
             try:
                 target_url
                 post_page = requests.get(target_url)
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
-
-                job_soup = job_soup.find(name="span", attrs={"id": "job_summary"})
+                # job_soup = job_soup.find(name="span", attrs={"id": "job_summary"})  #TODO: FIX
                 job_soup = job_soup.get_text().lower()
 
             except:
