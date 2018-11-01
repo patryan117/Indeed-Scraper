@@ -71,11 +71,8 @@ def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title = "'Job Title"):
         )
     )
 
-
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='size-margins')
-
-
 
 
 def dict_to_bar(dict, limit=10):
@@ -118,8 +115,6 @@ def dict_to_bar(dict, limit=10):
 
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='size-margins')
-
-
 
 
 
@@ -178,26 +173,19 @@ def dict_col_to_cum_dict(dict, column_num = 7):
     return (cum_dict)
 
 
-
 def remove_empty_rows(df):
     df = df.dropna(subset=['Skills'], inplace=True)
     return df
-
 
 
 def remove_duplicate_rows(df):
     df = df.drop_duplicates(subset=['Post Text'], keep=False)
     return df
 
+
 def export_as_csv(df):
     df = pd.DataFrame(df)
     df.to_csv("jobs_matrix.csv")
-
-
-#TODO use the title() to capitalize the final outputs
-
-
-
 
 
 def col_dict_to_horz_bar_chart(dict, colum_num=7):
@@ -230,8 +218,6 @@ def col_dict_to_horz_bar_chart(dict, colum_num=7):
 
 
 
-
-
 def list_to_dict(target_list):    # Creates an dictionary for counting, with each pair as key:0
     target_list = list({ str(target_list[x].lower())for x in range(len(target_list))})
     return {target_list[x] : 0 for x in range(len(target_list))}
@@ -249,25 +235,15 @@ def column(matrix, i):
 
 
 
-
 skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ", "Perl",
                " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ",  " Tensor Flow ", " deep learning ",
                " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
                " raspberry pi "
                ]
 
-# frameworks_list = ["hadoop", "spark", "aws", "hive", "nosql", "cassandra", "mysql",
-                   # "mysql", "hbase", "pig", "mongodb", "git", "elasticsearch", "numpy",
-                   # "tensorflow", "scipy", "hadoop" ]
-
-# academics_list = [" PhD ", " Bachelor's ", " Bachelors ", " Master's ", "Masters", "publications", "Journal", "statistics",
-#                   "Mathematics", ]
-
-
 
 global list_spot
 global matrix_counter
-
 
 def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1):
 
@@ -283,14 +259,9 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
     list_spot = 0
     matrix_counter = 0
     job_page_soup_list = []
-
-
-    job_title = job_title.replace(" ", "+")   # format the job title so that it can be directly inserted into the indeed url
-    job_location = job_location.replace(" ", "+")    # format the job location so that it can be inserted into the indeed url
+    job_title = job_title.replace(" ", "+")  
+    job_location = job_location.replace(" ", "+")    
     job_location = job_location.replace(",", "%2C")
-
-
-
 
     for x in range(num_pages):           # number of pages to be scraped
 
@@ -305,10 +276,9 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
 
 
         page = requests.get(url)
-        soup = BeautifulSoup(page.text, "html.parser")    # read the various components of the page, rather than as one long string.
+        soup = BeautifulSoup(page.text, "html.parser")  
         job_page_soup_list.append(soup)
-       # print(soup.prettify())                            #printing soup in a more structured tree format that makes for easier reading
-
+       # print(soup.prettify())                          
         jobs = []
         for div in soup.find_all(name="div", attrs={"class":"row"}):
           for a in div.find_all(name="a", attrs={"data-tn-element":"jobTitle"}):
@@ -401,24 +371,11 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
             print(str(job_data_matrix[x+ list_spot][7]))
             matrix_counter += 1
 
-
-
-
     elapsed_time = time.time() - start_time
-
-
 
     return(job_data_matrix)
 
-
-
-
-
-# print(np.matrix(returned_job_matrix))
-
-# df = pd.DataFrame(returned_job_matrix)
-# df.to_csv("jobs_matrix.csv")
-
+#####################################################
 
 if __name__ == '__main__':
     main()
