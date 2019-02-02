@@ -18,7 +18,7 @@ from collections import OrderedDict
 
 
 def main():
-    job_title = "data scientist"
+    job_title = "data engineer"
     job_location = "Boston, MA"
     data = scrape(job_title=job_title, job_location = job_location, num_pages = 2)
     df = pd.DataFrame(data, columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text', 'Skills'])
