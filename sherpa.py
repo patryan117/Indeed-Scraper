@@ -308,8 +308,6 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 locations.append("N/A")
 
 
-
-
         salaries = []
         for td in soup.find_all(name="td", attrs={"class": "snip"}):
             try:
@@ -327,10 +325,8 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
         list_spot += matrix_counter
         matrix_counter = 0
 
-        print(len(jobs))
 
         for x in range((len(jobs))):
-            # print(x)
 
             print(locations[x])
             job_data_matrix[x + list_spot][0] = jobs[x]
@@ -347,15 +343,14 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
                 job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})  #TODO
                 job_description = job_description.get_text().lower()
-                print(job_description)
 
             except:
                 print("x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
-                print(" TEXT PARSING ERROR!!! \n")
+                print(" ERROR PARSING JOB DESCRIPTION \n")
                 job_description = "N/A"
 
             job_description = job_description.replace(",", " ")
-            job_description = job_description.replace(".", " ")
+            # job_description = job_description.replace(".", " ")
             job_description = job_description.replace(";", " ")
             job_data_matrix[x + list_spot][6] = job_description
 
@@ -368,7 +363,8 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                   job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
                       3] + "\t" + " Date: " + job_data_matrix[x + list_spot][4])
             print(str(job_data_matrix[x + list_spot][7]))
-            print(target_url)
+            print(job_description)
+
 
             matrix_counter += 1
 
