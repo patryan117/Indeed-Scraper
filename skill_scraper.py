@@ -275,7 +275,8 @@ def scrape(job_title="data analyst", job_location = "Boston, MA", num_pages = 1)
         page = requests.get(url)
         soup = BeautifulSoup(page.text, "html.parser")  
         job_page_soup_list.append(soup)
-       # print(soup.prettify())                          
+       # print(soup.prettify())
+
         jobs = []
         for div in soup.find_all(name="div", attrs={"class":"row"}):
           for a in div.find_all(name="a", attrs={"data-tn-element":"jobTitle"}):

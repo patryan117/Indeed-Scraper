@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/skill_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/skill_scraper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,6 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1549132626310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$test.coverage" NAME="test Coverage Results" MODIFIED="1532041782326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549127729228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -21,8 +22,8 @@
       <file leaf-file-name="skill_scraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/skill_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-558">
-              <caret line="29" column="77" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
+            <state relative-caret-position="191">
+              <caret line="269" column="21" lean-forward="true" selection-end-line="379" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#959#2011#0" />
@@ -35,7 +36,22 @@
       </file>
       <file leaf-file-name="sherpa.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sherpa.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="336" column="40" lean-forward="true" selection-start-line="336" selection-start-column="40" selection-end-line="336" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#958#2010#0" />
+                <element signature="e#2050#2862#0" />
+                <element signature="e#2917#3990#0" />
+                <element signature="e#4045#4367#0" />
+                <element signature="e#4401#4462#0" />
+                <element signature="e#4500#4571#0" />
+                <element signature="e#4601#4655#0" />
+                <element signature="e#4713#5851#0" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -46,6 +62,11 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>10</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -109,7 +130,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.skill_scraper">
+  <component name="RunManager" selected="Python.sherpa">
+    <configuration name="sherpa" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Indeed-Scraper" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sherpa.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="skill_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Indeed-Scraper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -151,9 +191,11 @@
     <list>
       <item itemvalue="Python.skill_scraper" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.sherpa" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.sherpa" />
         <item itemvalue="Python.skill_scraper" />
         <item itemvalue="Python.test" />
       </list>
@@ -179,11 +221,11 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.34708393" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3499289" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.100995734" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32859176" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32859176" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12877263" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12877263" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -249,8 +291,8 @@
     <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/skill_scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-558">
-          <caret line="29" column="77" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
+        <state relative-caret-position="191">
+          <caret line="269" column="21" lean-forward="true" selection-end-line="379" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#959#2011#0" />
@@ -261,7 +303,22 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="336" column="40" lean-forward="true" selection-start-line="336" selection-start-column="40" selection-end-line="336" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#958#2010#0" />
+            <element signature="e#2050#2862#0" />
+            <element signature="e#2917#3990#0" />
+            <element signature="e#4045#4367#0" />
+            <element signature="e#4401#4462#0" />
+            <element signature="e#4500#4571#0" />
+            <element signature="e#4601#4655#0" />
+            <element signature="e#4713#5851#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
