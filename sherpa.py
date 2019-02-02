@@ -22,9 +22,9 @@ def main():
     df = pd.DataFrame(data,
                       columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text',
                                'Skills'])
-    df = remove_duplicate_rows(df)
-    cum_dict = dict_col_to_cum_dict(df, 7)
-    chart1 = dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
+    # df = remove_duplicate_rows(df)
+    # cum_dict = dict_col_to_cum_dict(df, 7)
+    # chart1 = dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
 
 
 def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
@@ -228,10 +228,8 @@ def column(matrix, i):
 
 
 skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
-               "Perl",
-               " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ", " Tensor Flow ",
-               " deep learning ",
-               " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
+               "Perl", " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ", " Tensor Flow ",
+               " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
                                                                                                          " raspberry pi "
                ]
 
@@ -240,8 +238,8 @@ global matrix_counter
 
 
 def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
-    start_time = time.time()
 
+    start_time = time.time()
     print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
 
     w, h = 8, 6000;
@@ -267,9 +265,12 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
 
         jobs = []
         for div in soup.find_all(name="div", attrs={"class": "row"}):
-            for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
-                jobs.append(a["title"])
-                print(a)
+            try:
+                for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
+                    jobs.append(a["title"])
+                    print(a)
+            except:
+                jobs.append("")
 
         dates = []
         for div in soup.find_all(name="div", attrs={"class": "row"}):
@@ -296,13 +297,18 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 base_url = (a["href"])
                 post_urls.append("http://indeed.com" + str(base_url))
 
+
         locations = []
-        try:
-            spans = soup.find_all(name="span", attrs={"class": "location"})
-            for span in spans:
-                locations.append(span.text)
-        except:
-            locations.append("N/A")
+        for div in soup.find_all(name="div", attrs={"class": "row"}):
+            try:
+                spans = soup.find_all(name="span", attrs={"class": "location"})
+                for span in spans:
+                    locations.append(span.text)
+            except:
+                locations.append("N/A")
+
+
+
 
         salaries = []
         for td in soup.find_all(name="td", attrs={"class": "snip"}):
@@ -321,35 +327,42 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
         list_spot += matrix_counter
         matrix_counter = 0
 
+        print(len(jobs))
+
         for x in range((len(jobs))):
-            print(x)
+            # print(x)
+
+            print(locations[x])
             job_data_matrix[x + list_spot][0] = jobs[x]
             job_data_matrix[x + list_spot][1] = companies[x]
             job_data_matrix[x + list_spot][2] = salaries[x]
             job_data_matrix[x + list_spot][3] = locations[x]
             job_data_matrix[x + list_spot][4] = dates[x]
             job_data_matrix[x + list_spot][5] = post_urls[x]
+
             target_url = job_data_matrix[x + list_spot][5]
 
             try:
-                target_url
                 post_page = requests.get(target_url)
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
-                # job_soup = job_soup.find(name="span", attrs={"id": "job_summary"})  #TODO
-                job_soup = job_soup.get_text().lower()
+                job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})  #TODO
+                job_description = job_description.get_text().lower()
+                print(job_description)
 
             except:
                 print("x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
-                print(" URL ERROR!!! \n")
-                continue
+                print(" TEXT PARSING ERROR!!! \n")
+                job_description = "N/A"
 
-            job_soup = job_soup.replace(",", " ")
-            job_soup = job_soup.replace(".", " ")
-            job_soup = job_soup.replace(";", " ")
-            job_data_matrix[x + list_spot][6] = job_soup
+            job_description = job_description.replace(",", " ")
+            job_description = job_description.replace(".", " ")
+            job_description = job_description.replace(";", " ")
+            job_data_matrix[x + list_spot][6] = job_description
 
             data_science_skills_dict = list_to_dict(skills_list)
             job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_soup)
+
+
 
             print("\nJob Title: " + job_data_matrix[x + list_spot][0] + "\t" + "Company: " +
                   job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][

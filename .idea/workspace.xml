@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skill_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/skill_scraper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1549132626310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1549136383138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$test.coverage" NAME="test Coverage Results" MODIFIED="1532041782326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549127729228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -37,8 +36,8 @@
       <file leaf-file-name="sherpa.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sherpa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="336" column="40" lean-forward="true" selection-start-line="336" selection-start-column="40" selection-end-line="336" selection-end-column="40" />
+            <state relative-caret-position="57">
+              <caret line="345" column="52" lean-forward="true" selection-start-line="345" selection-start-column="52" selection-end-line="345" selection-end-column="52" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#958#2010#0" />
@@ -66,6 +65,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>10</find>
+      <find>counter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -221,7 +221,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3499289" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43100995" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.100995734" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32859176" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32859176" />
@@ -304,8 +304,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="336" column="40" lean-forward="true" selection-start-line="336" selection-start-column="40" selection-end-line="336" selection-end-column="40" />
+        <state relative-caret-position="57">
+          <caret line="345" column="52" lean-forward="true" selection-start-line="345" selection-start-column="52" selection-end-line="345" selection-end-column="52" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#958#2010#0" />
