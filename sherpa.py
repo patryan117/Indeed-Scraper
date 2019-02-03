@@ -85,11 +85,12 @@ class Sherpa:
                     for span in sec_try:
                         company_name_list.append(span.text.strip())
 
-            # problem with location parsing, where sponsored and non sponsored have different places for location
+
+            # note sponsored posts have a div for location and non sponsored posts have a span
             location_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 try:
-                    spans = div.find_all(name="span", attrs={"class": "location"})
+                    spans = div.find_all(attrs={"class": "location"})
                     for span in spans:
                         location_list.append(span.text.strip())
 
