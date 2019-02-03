@@ -19,36 +19,27 @@ class Sherpa:
     """A basic web scraper to extract job posting information from indeed.com"""
 
 
+
+
     def __init__ (self):
 
-        job_df = None
-        company_df = None
+        self.name = "Keith"
+        self.job_df = 3
 
 
 
-    def scrape_by_job_title(self, job_title="data analyst", job_location="Boston, MA", num_pages=2):
-
-        self.df_column_names_list = ['Job_Title', 'Company', "Location", "Salary", 'Post_Date_Text', 'Post_URL', 'Post_Text',
-                                'Retrial_Date']
-
-        self.job_df = pd.DataFrame(columns=self.df_column_names_list)
-
-        self.temp_df = pd.DataFrame(columns=self.df_column_names_list)
-
+    def scrape_by_job_title(job_title="data analyst", job_location="Boston, MA", num_pages=2):
 
         print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
-
-        job_title = job_title.replace(" ", "+")
-        job_location = job_location.replace(" ", "+")
-        job_location = job_location.replace(",", "%2C")
-
 
         w, h = 9, 6000;
         job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
         list_spot = 0
         matrix_counter = 0
         job_page_soup_list = []
-
+        job_title = job_title.replace(" ", "+")
+        job_location = job_location.replace(" ", "+")
+        job_location = job_location.replace(",", "%2C")
 
         for x in range(num_pages):  # number of pages to be scraped
 
@@ -60,63 +51,32 @@ class Sherpa:
             soup = BeautifulSoup(page.text, "html.parser")
             job_page_soup_list.append(soup)
 
-            ['Job_Title', 'Company', "Location", "Salary", 'Post_Date_Text', 'Post_URL', 'Post_Text',
-             'Retrial_Date']
-
-            job_title_list = []
+            jobs = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 try:
                     for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
-                        job_title_list.append(a["title"])
+                        jobs.append(a["title"])
                 except:
-                    job_title_list.append("")
+                    jobs.append("")
 
+            dates = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                try:
+                    for a in div.find(name="span", attrs={"class": "date"}):
+                        dates.append(a)
+                except:
+                    dates.append("Sponsored")
 
-            company_name_list = []
+            companies = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 company = div.find_all(name="span", attrs={"class": "company"})
                 if len(company) > 0:
                     for b in company:
-                        company_name_list.append(b.text.strip())
+                        companies.append(b.text.strip())
                 else:
                     sec_try = div.find_all(name="span", attrs={"class": "result - link - source"})
                     for span in sec_try:
-                        company_name_list.append(span.text.strip())
-
-            location_list = []
-            for div in soup.find_all(name="div", attrs={"class": "row"}):
-                try:
-                    spans = soup.find_all(name="span", attrs={"class": "location"})
-                    for span in spans:
-                        location_list.append(span.text)
-                except:
-                    location_list.append("N/A")
-
-
-            salary_list = []
-            for td in soup.find_all(name="td", attrs={"class": "snip"}):
-                try:
-                    for snip in soup.find_all(name="span", attrs={"class": "no-wrap"}):
-                        if "date" in snip.text:
-                            salary_list.append("No Salary Provided")
-                except:
-                    try:
-                        div_two = div.find(name="div", attrs={"class": "sjcl"})
-                        div_three = div_two.find("div")
-                        salary_list.append(div_three.text.strip())
-                    except:
-                        salary_list.append("No Salary Provided")
-
-
-            post_date_text_list = []
-            for div in soup.find_all(name="div", attrs={"class": "row"}):
-                try:
-                    for a in div.find(name="span", attrs={"class": "date"}):
-                        post_date_text_list.append(a)
-                except:
-                    post_date_text_list.append("Sponsored")
-
-
+                        companies.append(span.text.strip())
 
             post_urls = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
@@ -124,24 +84,39 @@ class Sherpa:
                     base_url = (a["href"])
                     post_urls.append("http://indeed.com" + str(base_url))
 
+            locations = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                try:
+                    spans = soup.find_all(name="span", attrs={"class": "location"})
+                    for span in spans:
+                        locations.append(span.text)
+                except:
+                    locations.append("N/A")
 
-            job_data_matrix[x + list_spot][8] = datetime.datetime.now()
-
-
-
-
-            self.job_df = pd.DataFrame(columns=self.df_column_names_list)
+            salaries = []
+            for td in soup.find_all(name="td", attrs={"class": "snip"}):
+                try:
+                    for snip in soup.find_all(name="span", attrs={"class": "no-wrap"}):
+                        if "date" in snip.text:
+                            salaries.append("No Salary Provided")
+                except:
+                    try:
+                        div_two = div.find(name="div", attrs={"class": "sjcl"})
+                        div_three = div_two.find("div")
+                        salaries.append(div_three.text.strip())
+                    except:
+                        salaries.append("No Salary Provided")
 
             list_spot += matrix_counter
             matrix_counter = 0
 
-            for x in range((len(job_title_list))):
+            for x in range((len(jobs))):
 
-                job_data_matrix[x + list_spot][0] = job_title_list[x]
-                job_data_matrix[x + list_spot][1] = company_name_list[x]
-                job_data_matrix[x + list_spot][2] = salary_list[x]
-                job_data_matrix[x + list_spot][3] = location_list[x]
-                job_data_matrix[x + list_spot][4] = post_date_text_list[x]
+                job_data_matrix[x + list_spot][0] = jobs[x]
+                job_data_matrix[x + list_spot][1] = companies[x]
+                job_data_matrix[x + list_spot][2] = salaries[x]
+                job_data_matrix[x + list_spot][3] = locations[x]
+                job_data_matrix[x + list_spot][4] = dates[x]
                 job_data_matrix[x + list_spot][5] = post_urls[x]
 
                 target_url = job_data_matrix[x + list_spot][5]
@@ -169,6 +144,7 @@ class Sherpa:
 
                 # job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_description)
 
+                job_data_matrix[x + list_spot][8] = datetime.datetime.now()
 
                 print("\nJob Title: " + job_data_matrix[x + list_spot][0] + "\t" + "Company: " +
                       job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
@@ -178,6 +154,7 @@ class Sherpa:
 
                 matrix_counter += 1
 
+        print(job_data_matrix)
         return (job_data_matrix)
 
 
@@ -186,9 +163,8 @@ class Sherpa:
 
 #########################################################
 
-x = Sherpa()
-x.scrape_by_job_title()
-print(x.job_df)
+josh = Sherpa
+josh.scrape_by_job_title(job_title="data analyst", job_location="Boston, MA", num_pages=2)
 
 
 
