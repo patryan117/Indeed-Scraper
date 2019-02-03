@@ -13,6 +13,233 @@ import plotly.graph_objs as go
 
 
 
+
+class Sherpa:
+
+    """A basic web scraper to extract job posting information from indeed.com"""
+
+
+
+
+    def __init__ (self):
+
+        self.name = "Keith"
+        self.job_df = 3
+
+
+
+    def scrape_by_job_title(job_title="data analyst", job_location="Boston, MA", num_pages=2):
+
+        print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
+
+        w, h = 9, 6000;
+        job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
+        list_spot = 0
+        matrix_counter = 0
+        job_page_soup_list = []
+        job_title = job_title.replace(" ", "+")
+        job_location = job_location.replace(" ", "+")
+        job_location = job_location.replace(",", "%2C")
+
+        for x in range(num_pages):  # number of pages to be scraped
+
+            counter = x * 10  # counter to increment the searches displayed per page (double check)
+            url = "https://www.indeed.com/jobs?q=" + str(job_title) + "&l=" + str(job_location) + "&start=" + str(counter)
+            print("\nSearching Page: " + "(" + str(x + 1) + ")" + "\n" + url + "\n")
+
+            page = requests.get(url)
+            soup = BeautifulSoup(page.text, "html.parser")
+            job_page_soup_list.append(soup)
+
+            jobs = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                try:
+                    for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
+                        jobs.append(a["title"])
+                except:
+                    jobs.append("")
+
+            dates = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                try:
+                    for a in div.find(name="span", attrs={"class": "date"}):
+                        dates.append(a)
+                except:
+                    dates.append("Sponsored")
+
+            companies = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                company = div.find_all(name="span", attrs={"class": "company"})
+                if len(company) > 0:
+                    for b in company:
+                        companies.append(b.text.strip())
+                else:
+                    sec_try = div.find_all(name="span", attrs={"class": "result - link - source"})
+                    for span in sec_try:
+                        companies.append(span.text.strip())
+
+            post_urls = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
+                    base_url = (a["href"])
+                    post_urls.append("http://indeed.com" + str(base_url))
+
+            locations = []
+            for div in soup.find_all(name="div", attrs={"class": "row"}):
+                try:
+                    spans = soup.find_all(name="span", attrs={"class": "location"})
+                    for span in spans:
+                        locations.append(span.text)
+                except:
+                    locations.append("N/A")
+
+            salaries = []
+            for td in soup.find_all(name="td", attrs={"class": "snip"}):
+                try:
+                    for snip in soup.find_all(name="span", attrs={"class": "no-wrap"}):
+                        if "date" in snip.text:
+                            salaries.append("No Salary Provided")
+                except:
+                    try:
+                        div_two = div.find(name="div", attrs={"class": "sjcl"})
+                        div_three = div_two.find("div")
+                        salaries.append(div_three.text.strip())
+                    except:
+                        salaries.append("No Salary Provided")
+
+            list_spot += matrix_counter
+            matrix_counter = 0
+
+            for x in range((len(jobs))):
+
+                job_data_matrix[x + list_spot][0] = jobs[x]
+                job_data_matrix[x + list_spot][1] = companies[x]
+                job_data_matrix[x + list_spot][2] = salaries[x]
+                job_data_matrix[x + list_spot][3] = locations[x]
+                job_data_matrix[x + list_spot][4] = dates[x]
+                job_data_matrix[x + list_spot][5] = post_urls[x]
+
+                target_url = job_data_matrix[x + list_spot][5]
+
+                try:
+                    post_page = requests.get(target_url)
+                    job_soup = BeautifulSoup(post_page.text, "html.parser")
+                    job_description = job_soup.find(name="div", attrs={
+                        "class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
+                    job_description = str(job_description.get_text().lower())
+
+                except:
+                    print(
+                        "x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
+                    print(" ERROR PARSING JOB DESCRIPTION \n")
+                    job_description = "N/A"
+
+                job_description = job_description.replace(",", " ")
+                job_description = job_description.replace(".", " ")
+                job_description = job_description.replace("\n", " ")
+
+                job_data_matrix[x + list_spot][6] = job_description
+
+                # data_science_skills_dict = list_to_dict(skills_list)
+
+                # job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_description)
+
+                job_data_matrix[x + list_spot][8] = datetime.datetime.now()
+
+                print("\nJob Title: " + job_data_matrix[x + list_spot][0] + "\t" + "Company: " +
+                      job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
+                          3] + "\t" + " Date: " + job_data_matrix[x + list_spot][4])
+                print(job_description)
+                print(job_data_matrix[x + list_spot][7])
+
+                matrix_counter += 1
+
+        print(job_data_matrix)
+        return (job_data_matrix)
+
+
+
+
+
+#########################################################
+
+josh = Sherpa
+josh.scrape_by_job_title()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+
+
+
 def main():
 
     job_title = "data scientist"
@@ -355,4 +582,7 @@ if __name__ == '__main__':
 #
 #
 #     plotly.offline.plot({"data": data, "layout":layout})
-#
+
+
+"""
+
