@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import requests
 import plotly
 import operator
+import datetime
 
 
 import pandas as pd
@@ -24,13 +25,16 @@ import plotly.graph_objs as go
 import os
 
 def main():
+
     job_title = "data scientist"
     job_location = "NC"
-    data = scrape(job_title=job_title, job_location=job_location, num_pages=4)
-
+    data = scrape(job_title=job_title, job_location=job_location, num_pages=2)
     df = pd.DataFrame(data,
-                      columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text',
-                               'Skills'])
+                      columns=['Job Title', 'Company', "Salary", "Location", 'Post Date', 'Post URL', 'Post Text',
+                               'Skills', 'Retrial Date'])
+
+    print(df)
+
     df = remove_duplicate_rows(df)
 
 
@@ -66,16 +70,10 @@ def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
     layout = go.Layout(
         title='Keyword Frequency for ' + job_title + ' Job Posts:',
         autosize=True,  # change to True to manually set sizing parameters
-        xaxis=dict(range=[0, 1],
-                   # width = 500,
-                   # height = 500,
-                   # margin = go.Margin(   #  change to set sizing and margins
-                   # l=150,
-                   # r=50,
-                   # b=100,
-                   # t=100,
-                   # pad=4
-                   )
+        xaxis=dict(range=[0, 1]),
+        # width=500,
+        # height=500,
+        margin=go.Margin(l=150, r=50, b=100, t=100, pad=4)
     )
 
     # fig = go.Figure(data=data, layout=layout)
@@ -204,7 +202,7 @@ def column(matrix, i):
 skills_list = [" Python "," AWS" , ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
                "Perl", " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ", " Tensor Flow ",
                " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy",
-               " Objective C ", " raspberry pi "
+               " Objective C ", " raspberry pi ", " natural language processing "
                ]
 
 global list_spot
@@ -216,7 +214,7 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
     start_time = time.time()
     print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
 
-    w, h = 8, 6000;
+    w, h = 9, 6000;
     # global job_data_matrix
     job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
     list_spot = 0
@@ -308,14 +306,14 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
             job_data_matrix[x + list_spot][4] = dates[x]
             job_data_matrix[x + list_spot][5] = post_urls[x]
 
+
             target_url = job_data_matrix[x + list_spot][5]
 
             try:
                 post_page = requests.get(target_url)
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
                 job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
-                job_description = job_description.get_text()\
-                    .lower()
+                job_description = str(job_description.get_text().lower())
                 print(job_description)
 
             except:
@@ -324,20 +322,20 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 job_description = "N/A"
 
             job_description = job_description.replace(",", " ")
-            job_description = job_description.replace('\n', " ")
-            job_description = job_description.replace(";", " ")
-
+            job_description = job_description.replace(".", " ")
             job_data_matrix[x + list_spot][6] = job_description
 
             data_science_skills_dict = list_to_dict(skills_list)
             job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_description)
 
-
+            job_data_matrix[x + list_spot][8] = datetime.datetime.now()
 
             print("\nJob Title: " + job_data_matrix[x + list_spot][0] + "\t" + "Company: " +
                   job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
                       3] + "\t" + " Date: " + job_data_matrix[x + list_spot][4])
             print(str(job_data_matrix[x + list_spot][7]))
+
+
 
 
             matrix_counter += 1
