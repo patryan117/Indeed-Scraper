@@ -13,18 +13,30 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 from collections import OrderedDict
 
+from collections import Counter
+import pandas as pd
+import os
+import time
+import numpy as np
+import plotly
+import plotly.offline
+import plotly.graph_objs as go
+import os
 
 def main():
-    job_title = "data engineer"
-    job_location = "WI"
-    data = scrape(job_title=job_title, job_location=job_location, num_pages=2)
+    job_title = "data scientist"
+    job_location = "NC"
+    data = scrape(job_title=job_title, job_location=job_location, num_pages=4)
 
     df = pd.DataFrame(data,
                       columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text',
                                'Skills'])
-    # df = remove_duplicate_rows(df)
-    # cum_dict = dict_col_to_cum_dict(df, 7)
-    # chart1 = dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
+    df = remove_duplicate_rows(df)
+
+
+    cum_dict = dict_col_to_cum_dict(df, 7)
+
+    dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
 
 
 def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
@@ -66,11 +78,13 @@ def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
                    )
     )
 
-    fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='size-margins')
+    # fig = go.Figure(data=data, layout=layout)
+    # py.plot(fig, filename='size-margins')
+    plotly.offline.plot({"data": data, "layout":layout})
 
 
-def dict_to_bar(dict, limit=10):
+
+def dict_to_bar(dict, limit=15):
     dict_len = len(dict)
     dict = sorted(dict.items(), key=operator.itemgetter(1))
     dict = OrderedDict((tuple(dict)))
@@ -107,50 +121,10 @@ def dict_to_bar(dict, limit=10):
         ),
     )
 
-    fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='size-margins')
+
+    plotly.offline.plot({"data": data, "layout":layout})
 
 
-def make_salary_donut_chart(dict, limit=10):
-    skills = list((dict.keys()))[0:limit]
-    skill_count = list((dict.values()))[0:limit]
-
-    fig = {
-        "data": [
-            {
-                "values": skill_count,
-                "labels": skills,
-                "text": skills,
-                "showlegend": False,
-                'textposition': 'outside',
-                "textfont": {
-                    "size": 10,
-                },
-                "name": "",
-                "hoverinfo": "label+percent+name",
-                "hole": .7,
-                "type": "pie"
-            },
-        ],
-        "layout": {
-            "autosize": True,
-            "width": 200,
-            "height": 200,
-            "title": "",
-            "annotations": [
-                {
-                    "font": {
-                        "size": 15
-                    },
-                    "showarrow": False,
-                    "text": "Salaries",
-                },
-            ]
-        }
-    }
-
-    # return plotly.offline.plot(fig, output_type="div", include_plotlyjs=False)
-    py.plot(fig, filename='donut')
 
 
 def dict_col_to_cum_dict(dict, column_num=7):
@@ -227,10 +201,10 @@ def column(matrix, i):
     return [row[i] for row in matrix]
 
 
-skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
+skills_list = [" Python "," AWS" , ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
                "Perl", " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ", " Tensor Flow ",
-               " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
-                                                                                                         " raspberry pi "
+               " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy",
+               " Objective C ", " raspberry pi "
                ]
 
 global list_spot
@@ -243,7 +217,7 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
     print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
 
     w, h = 8, 6000;
-    global job_data_matrix
+    # global job_data_matrix
     job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
     list_spot = 0
     matrix_counter = 0
@@ -254,9 +228,9 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
 
     for x in range(num_pages):  # number of pages to be scraped
 
-        counter = x * 10
+        counter = x * 10  # counter to increment the searches displayed per page (double check)
         url = "https://www.indeed.com/jobs?q=" + str(job_title) + "&l=" + str(job_location) + "&start=" + str(counter)
-        print("\nSearching URL: " + "(" + str(x + 1) + ")" + "\n" + url + "\n")
+        print("\nSearching Page: " + "(" + str(x + 1) + ")" + "\n" + url + "\n")
 
         page = requests.get(url)
         soup = BeautifulSoup(page.text, "html.parser")
@@ -268,7 +242,6 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
             try:
                 for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
                     jobs.append(a["title"])
-                    print(a)
             except:
                 jobs.append("")
 
@@ -328,7 +301,6 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
 
         for x in range((len(jobs))):
 
-            print(locations[x])
             job_data_matrix[x + list_spot][0] = jobs[x]
             job_data_matrix[x + list_spot][1] = companies[x]
             job_data_matrix[x + list_spot][2] = salaries[x]
@@ -341,8 +313,10 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
             try:
                 post_page = requests.get(target_url)
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
-                job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})  #TODO
-                job_description = job_description.get_text().lower()
+                job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
+                job_description = job_description.get_text()\
+                    .lower()
+                print(job_description)
 
             except:
                 print("x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
@@ -350,12 +324,13 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 job_description = "N/A"
 
             job_description = job_description.replace(",", " ")
-            # job_description = job_description.replace(".", " ")
+            job_description = job_description.replace('\n', " ")
             job_description = job_description.replace(";", " ")
+
             job_data_matrix[x + list_spot][6] = job_description
 
             data_science_skills_dict = list_to_dict(skills_list)
-            job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_soup)
+            job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_description)
 
 
 
@@ -363,7 +338,6 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                   job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
                       3] + "\t" + " Date: " + job_data_matrix[x + list_spot][4])
             print(str(job_data_matrix[x + list_spot][7]))
-            print(job_description)
 
 
             matrix_counter += 1

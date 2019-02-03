@@ -13,10 +13,20 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 from collections import OrderedDict
 
+from collections import Counter
+import pandas as pd
+import os
+import time
+import numpy as np
+import plotly
+import plotly.offline
+import plotly.graph_objs as go
+import os
+
 def main():
-    job_title = "data engineer"
+    job_title = "data scientist"
     job_location = "NC"
-    data = scrape(job_title=job_title, job_location=job_location, num_pages=2)
+    data = scrape(job_title=job_title, job_location=job_location, num_pages=4)
 
     df = pd.DataFrame(data,
                       columns=['Job Title', 'Company', "Salary", "Location", 'Date Posted', 'Post URL', 'Post Text',
@@ -26,7 +36,7 @@ def main():
 
     cum_dict = dict_col_to_cum_dict(df, 7)
 
-    chart1 = dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
+    dict_to_freq_bar_chart(cum_dict, 15, len(df), job_title)
 
 
 def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
@@ -68,11 +78,13 @@ def dict_to_freq_bar_chart(dic, limit=15, posts=1, job_title="'Job Title"):
                    )
     )
 
-    fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='size-margins')
+    # fig = go.Figure(data=data, layout=layout)
+    # py.plot(fig, filename='size-margins')
+    plotly.offline.plot({"data": data, "layout":layout})
 
 
-def dict_to_bar(dict, limit=10):
+
+def dict_to_bar(dict, limit=15):
     dict_len = len(dict)
     dict = sorted(dict.items(), key=operator.itemgetter(1))
     dict = OrderedDict((tuple(dict)))
@@ -189,10 +201,10 @@ def column(matrix, i):
     return [row[i] for row in matrix]
 
 
-skills_list = [" Python ", ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
+skills_list = [" Python "," AWS" , ' sql ', " hadoop ", " R ", " C# ", " SAS ", "C++", "Java ", "Matlab", "Hive", " Excel ",
                "Perl", " noSQL ", " JavaScript ", " HBase ", " Tableau ", " Scala ", " machine learning ", " Tensor Flow ",
-               " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy", " Objective C "
-                                                                                                         " raspberry pi "
+               " deep learning ", " ML ", " PHP ", " Visual Basic ", " css ", " SAS ", "Octave", " aws ", " pig ", "numpy",
+               " Objective C ", " raspberry pi "
                ]
 
 global list_spot
@@ -302,7 +314,9 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 post_page = requests.get(target_url)
                 job_soup = BeautifulSoup(post_page.text, "html.parser")
                 job_description = job_soup.find(name="div", attrs={"class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
-                job_description = job_description.get_text().lower()
+                job_description = job_description.get_text()\
+                    .lower()
+                print(job_description)
 
             except:
                 print("x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
@@ -310,7 +324,7 @@ def scrape(job_title="data analyst", job_location="Boston, MA", num_pages=1):
                 job_description = "N/A"
 
             job_description = job_description.replace(",", " ")
-            job_description = job_description.replace("/n", " ")
+            job_description = job_description.replace('\n', " ")
             job_description = job_description.replace(";", " ")
 
             job_data_matrix[x + list_spot][6] = job_description
