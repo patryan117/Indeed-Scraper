@@ -26,44 +26,42 @@ class Sherpa:
 
 
 
-    def scrape_by_job_title(self, job_title="data analyst", job_location="Boston, MA", num_pages=2):
+    def scrape_by_job_title(self, searched_job_title="data analyst", job_location="Boston, MA", num_pages=2):
 
         self.df_column_names_list = ['Job_Title', 'Company', "Location", "Salary", 'Post_Date_Text', 'Post_URL',
                                 'Post_Text', 'Retrial_Date']
+
+
+        self.search_title = searched_job_title
+
 
         self.job_df = pd.DataFrame(columns=self.df_column_names_list)
 
 
 
 
-        print("\nSearching for '" + job_title + "' jobs in the '" + job_location + "' area...\n")
+        print("\nSearching for '" + searched_job_title + "' jobs in the '" + job_location + "' area...\n")
 
-        job_title = job_title.replace(" ", "+")
+        parsed_job_title = searched_job_title.replace(" ", "+")
         job_location = job_location.replace(" ", "+")
         job_location = job_location.replace(",", "%2C")
 
 
-        w, h = 9, 6000;
-        job_data_matrix = [[np.nan for x in range(w)] for y in range(h)]
-        list_spot = 0
-        matrix_counter = 0
         job_page_soup_list = []
 
 
-        for x in range(num_pages):  # number of pages to be scraped
+        for page in range(num_pages):  # number of pages to be scraped
 
             retrieval_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            counter = x * 10  # counter to increment the searches displayed per page (double check)
-            url = "https://www.indeed.com/jobs?q=" + str(job_title) + "&l=" + str(job_location) + "&start=" + str(counter)
+            counter = page * 10  # counter to increment the searches displayed per page (double check)
+            url = "https://www.indeed.com/jobs?q=" + str(parsed_job_title) + "&l=" + str(job_location) + "&start=" + str(counter)
             print("\nSearching Page: " + "(" + str(x + 1) + ")" + "\n" + url + "\n")
 
             page = requests.get(url)
             soup = BeautifulSoup(page.text, "html.parser")
             job_page_soup_list.append(soup)
 
-            ['Job_Title', 'Company', "Location", "Salary", 'Post_Date_Text', 'Post_URL', 'Post_Text',
-             'Retrial_Date']
 
             job_title_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
@@ -125,6 +123,7 @@ class Sherpa:
 
             post_url_list = []
             job_description_list = []
+
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
                     base_url = (a["href"])
@@ -141,10 +140,10 @@ class Sherpa:
                         job_description_list.append(job_description)
 
                     except:
-                        print(
-                            "x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
+
                         print(" ERROR PARSING JOB DESCRIPTION \n")
-                        job_description = "N/A"
+                        job_description_list.append("N/A")
+
 
 
             retrival_date_list = []
@@ -152,34 +151,14 @@ class Sherpa:
                 retrival_date_list.append(retrieval_date)
 
 
+            searched_job_title_list = []
+            for x in range(len(job_title_list)):
+                searched_job_title_list.append(searched_job_title)
 
 
-
-
-
-
-
-            list_spot += matrix_counter
-            matrix_counter = 0
-
-            print(np.array([job_title_list,company_name_list, location_list, salary_list, post_date_text_list, post_url_list, job_description_list, retrival_date_list]))
-
-
-            # self.temp_job_df = pd.DataFrame([job_title_list,company_name_list, location_list, salary_list, post_url_list, job_description_list, retrival_date_list], columns=self.df_column_names_list)
-
-
-            print(len(job_title_list))
-            print(len(company_name_list))
-            print(len(location_list))
-            print(len(salary_list))
-            print(len(post_date_text_list))
-            print(len(post_url_list))
-            print(len(job_description_list))
-            print(len(retrival_date_list))
-
-            print(post_date_text_list)
 
             temp = {
+                'Searched Job Title': searched_job_title_list,
                 'Job_Title': job_title_list,
                 'Company': company_name_list,
                 'Location' : location_list,
@@ -193,55 +172,17 @@ class Sherpa:
             self.temp_job_df = pd.DataFrame(data=temp)
 
 
-            # print(self.temp_job_df)
-            #
-            for x in range((len(job_title_list))):
+            self.job_df.append(self.temp_job_df)
 
-                job_data_matrix[x + list_spot][0] = job_title_list[x]
-                job_data_matrix[x + list_spot][1] = company_name_list[x]
-                job_data_matrix[x + list_spot][2] = salary_list[x]
-                job_data_matrix[x + list_spot][3] = location_list[x]
-                job_data_matrix[x + list_spot][4] = post_date_text_list[x]
-                job_data_matrix[x + list_spot][5] = post_url_list[x]
-                job_data_matrix[x + list_spot][6] = job_description_list[x]
+        print(self.temp_job_df)
 
 
 
 
 
-                # target_url = job_data_matrix[x + list_spot][5]
-                #
-                # try:
-                #     post_page = requests.get(target_url)
-                #     job_soup = BeautifulSoup(post_page.text, "html.parser")
-                #     job_description = job_soup.find(name="div", attrs={
-                #         "class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
-                #     job_description = str(job_description.get_text().lower())
-                #
-                # except:
-                #     print(
-                #         "x:" + str(x) + "  list_spot:" + str(list_spot) + " matrix_counter: " + str(matrix_counter))
-                #     print(" ERROR PARSING JOB DESCRIPTION \n")
-                #     job_description = "N/A"
-                #
-                # job_description = job_description.replace(",", " ")
-                # job_description = job_description.replace(".", " ")
-                # job_description = job_description.replace("\n", " ")
-                #
-
-                # data_science_skills_dict = list_to_dict(skills_list)
-
-                # job_data_matrix[x + list_spot][7] = incr_dict(data_science_skills_dict, job_description)
 
 
-                print("\nJob Title: " + job_data_matrix[x + list_spot][0] + "\t" + "Company: " +
-                      job_data_matrix[x + list_spot][1] + "\t" + "Location: " + job_data_matrix[x + list_spot][
-                          3] + "\t" + " Date: " + job_data_matrix[x + list_spot][4])
-                print(job_description_list[x])
 
-                matrix_counter += 1
-
-        return (job_data_matrix)
 
 
 
