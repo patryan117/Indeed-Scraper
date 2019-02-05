@@ -26,37 +26,68 @@ class Sherpa:
 
 
 
+    # How to make visualizations on the front end?
+
+    # Current scraper:
+    #TODO add save_as_csv_method (saves main_df as a .csv to a specifc directory)
+    #TODO dig up mapping program to translate address text to ZIP code.
+    #TODO figure out how to solve "end of page" issue:
+        #i) detect repeated entries
+        #2) parse the # of pages and run until the end of page is reached
+        #3) set filter to only scrape new pages
+
+
+    # Additional scraping module:
+    #TODO add scrape_by_company_name method
+
+
+    # Database injection script:
+    #TODO create a seperate program that can run in the "Task Scheduler" (importing sherpa as a library)
+    #TODO add a random delay period to avoid being blacklisted
+
+    # TODO database
+
+    # Big questions:
+    # Does it make more sense to identify skills in the scraping script, or should it be done in the database afterwards?
+    # Do we need a primary key for the job database?
+        #1) Numbered based on insertion order (probabbly tough to initiate in sql)
+        #2) Time series related metric (time that url was retrieved)
+        #3) Post URL (probably unique)
+        #4) No way to form lists
+    # Probably makes more sense to not save the original text regarding time since posting.  (only save inferred date)
+    # Realistically, if we're pulling on a daily basis, and only selecting new dates, we minimize scraping and know the post date exactly.  (should there be a setting for only_new_posts = True)
+
+    #TODO: Backburner:
+        # flesh out keyword's and technical backgrounds
+        # parse out degrees (masters, bachelors, PhD) and subject (computer science, finance)
+        # Parse out minimum experience required
+
+    #TODO:
+
+
+
+
     def scrape_by_job_title(self, searched_job_title="data analyst", job_location="Boston, MA", num_pages=2):
 
-        self.df_column_names_list = ['Job_Title', 'Company', "Location", "Salary", 'Post_Date_Text', 'Post_URL',
-                                'Post_Text', 'Retrial_Date']
-
-
         self.search_title = searched_job_title
-
-
-        self.job_df = pd.DataFrame(columns=self.df_column_names_list)
-
-
-
+        self.main_df = pd.DataFrame()  # Col names are inherited from the temp df via appending
 
         print("\nSearching for '" + searched_job_title + "' jobs in the '" + job_location + "' area...\n")
 
-        parsed_job_title = searched_job_title.replace(" ", "+")
-        job_location = job_location.replace(" ", "+")
-        job_location = job_location.replace(",", "%2C")
+        formatted_job_title = searched_job_title.replace(" ", "+")
+        formatted_job_location = job_location.replace(" ", "+")\
+            .replace(",", "%2C")
 
 
         job_page_soup_list = []
-
 
         for page in range(num_pages):  # number of pages to be scraped
 
             retrieval_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             counter = page * 10  # counter to increment the searches displayed per page (double check)
-            url = "https://www.indeed.com/jobs?q=" + str(parsed_job_title) + "&l=" + str(job_location) + "&start=" + str(counter)
-            print("\nSearching Page: " + "(" + str(x + 1) + ")" + "\n" + url + "\n")
+            url = "https://www.indeed.com/jobs?q=" + str(formatted_job_title) + "&l=" + str(formatted_job_location) + "&start=" + str(counter)
+            print("\nSearching Page: " + "(" + str(page + 1) + ")" + "\n" + url + "\n")
 
             page = requests.get(url)
             soup = BeautifulSoup(page.text, "html.parser")
@@ -91,7 +122,6 @@ class Sherpa:
                     spans = div.find_all(attrs={"class": "location"})
                     for span in spans:
                         location_list.append(span.text.strip())
-
                 except:
                     location_list.append("N/A")
 
@@ -156,7 +186,6 @@ class Sherpa:
                 searched_job_title_list.append(searched_job_title)
 
 
-
             temp = {
                 'Searched Job Title': searched_job_title_list,
                 'Job_Title': job_title_list,
@@ -172,7 +201,7 @@ class Sherpa:
             self.temp_job_df = pd.DataFrame(data=temp)
 
 
-            self.job_df.append(self.temp_job_df)
+            self.main_df.append(self.temp_job_df)
 
         print(self.temp_job_df)
 
@@ -180,14 +209,8 @@ class Sherpa:
 
 
 
-
-
-
-
-
-
-
-
+#########################################################
+# IMPLEMENTATION                                        #
 #########################################################
 
 x = Sherpa()
