@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/skill_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/skill_scraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp-plot.html" beforeDir="false" afterPath="$PROJECT_DIR$/temp-plot.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,15 +17,15 @@
     <SUITE FILE_PATH="coverage/Indeed_Scraper$scratch_16.coverage" NAME="scratch_16 Coverage Results" MODIFIED="1549308874555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1549278657679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$test.coverage" NAME="test Coverage Results" MODIFIED="1532041782326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549139981073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549366168709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="skill_scraper.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="skill_scraper.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/skill_scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="238">
+              <caret line="150" column="81" lean-forward="true" selection-start-line="150" selection-start-column="81" selection-end-line="150" selection-end-column="81" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -31,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sherpa.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sherpa.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sherpa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="102">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -47,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/save_me.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2992">
-              <caret line="575" column="18" lean-forward="true" selection-start-line="575" selection-start-column="18" selection-end-line="575" selection-end-column="18" />
+              <caret line="575" column="18" selection-start-line="575" selection-start-column="18" selection-end-line="575" selection-end-column="18" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -76,8 +78,8 @@
       <find>print</find>
       <find>print(job</find>
       <find>plot</find>
-      <find>excel</find>
-      <find>r</find>
+      <find />
+      <find />
       <find>date</find>
       <find>days</find>
       <find>temp_job</find>
@@ -90,10 +92,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/skill_scraper.py" />
         <option value="$PROJECT_DIR$/save_me.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_16.py" />
         <option value="$PROJECT_DIR$/sherpa.py" />
+        <option value="$PROJECT_DIR$/skill_scraper.py" />
       </list>
     </option>
   </component>
@@ -106,7 +108,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-15" />
     <option name="width" value="1950" />
     <option name="height" value="2075" />
@@ -148,7 +150,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch_16">
+  <component name="RunManager" selected="Python.skill_scraper">
     <configuration name="scratch_16" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Indeed-Scraper" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,9 +235,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.skill_scraper" />
         <item itemvalue="Python.scratch_16" />
         <item itemvalue="Python.sherpa" />
-        <item itemvalue="Python.skill_scraper" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -271,9 +273,9 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.100995734" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32859176" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4224751" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4224751" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32859176" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.26869807" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26827633" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -357,16 +359,6 @@
     <entry file="file://$PROJECT_DIR$/temp-plot.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/skill_scraper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pandas/core/frame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -377,7 +369,7 @@
     <entry file="file://$PROJECT_DIR$/save_me.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2992">
-          <caret line="575" column="18" lean-forward="true" selection-start-line="575" selection-start-column="18" selection-end-line="575" selection-end-column="18" />
+          <caret line="575" column="18" selection-start-line="575" selection-start-column="18" selection-end-line="575" selection-end-column="18" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -393,8 +385,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="102">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/skill_scraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="150" column="81" lean-forward="true" selection-start-line="150" selection-start-column="81" selection-end-line="150" selection-end-column="81" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

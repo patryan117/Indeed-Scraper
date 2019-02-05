@@ -16,7 +16,11 @@ import plotly.graph_objs as go
 
 class Sherpa:
 
-    """A basic web scraper to extract job posting information from indeed.com"""
+    """A basic web scraper to extract and store daily job posts for a specific job title:
+        - Detects job title, company, location and job description
+
+
+    """
 
 
     def __init__ (self):
