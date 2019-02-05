@@ -17,7 +17,11 @@ import plotly.graph_objs as go
 class Sherpa:
 
     """A basic web scraper to extract and store daily job posts for a specific job title:
-        - Detects job title, company, location and job description
+        - Recovers primary fields job title, company, location and job description
+        - Adds advanced fields (exact location, FIPS code, skill-phrases)
+        - Scrape should default to the entire united states and jobs posted within 1 day (location="united_states)), (window=1)
+        - Visualizations and aggregate calculations should be pursued on the front end
+
 
 
     """
@@ -30,10 +34,8 @@ class Sherpa:
 
 
 
-    # How to make visualizations on the front end?
 
     # Current scraper:
-    #TODO add save_as_csv_method (saves main_df as a .csv to a specifc directory)
     #TODO dig up mapping program to translate address text to ZIP code.
     #TODO figure out how to solve "end of page" issue:
         #i) detect repeated entries
@@ -58,7 +60,6 @@ class Sherpa:
         #2) Time series related metric (time that url was retrieved)
         #3) Post URL (probably unique)
         #4) No way to form lists
-    # Probably makes more sense to not save the original text regarding time since posting.  (only save inferred date)
     # Realistically, if we're pulling on a daily basis, and only selecting new dates, we minimize scraping and know the post date exactly.  (should there be a setting for only_new_posts = True)
 
     #TODO: Backburner:
