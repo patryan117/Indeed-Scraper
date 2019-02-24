@@ -25,13 +25,14 @@ class Sherpa:
 
 
 
-
-
     def scrape_by_job_title(self,
                             searched_job_title="data analyst",
                             job_location="Boston, MA",
                             num_pages=2,
-                            skip_sponsored = True):
+                            skip_sponsored = True,
+                            exact_matching = True,
+                            max_date_limiter = 1
+                            ):
 
         self.main_df = pd.DataFrame()
         self.search_title = searched_job_title
@@ -39,7 +40,7 @@ class Sherpa:
 
 
 
-
+        # TODO refactor with f{} and incorporate additional parameters
         print("\nSearching for '" + searched_job_title + "' jobs in the '" + job_location + "' area...\n")
 
         formatted_job_title = searched_job_title.replace(" ", "+")
