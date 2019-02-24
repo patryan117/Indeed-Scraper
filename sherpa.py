@@ -16,11 +16,6 @@ import plotly.graph_objs as go
 
 class Sherpa:
 
-    """A basic web scraper to extract and store daily job posts for a specific job title:
-        - Recovers primary fields job title, company, location and job description
-        - Adds advanced fields (exact location, FIPS code, skill-phrases)
-    """
-
 
 
     def __init__ (self):
