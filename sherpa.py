@@ -31,7 +31,7 @@ class Sherpa:
                             num_pages=2,
                             skip_sponsored = True,
                             exact_matching = True,
-                            max_date_limiter = 1
+                            max_date_limiter = 1,
                             ):
 
         self.main_df = pd.DataFrame()
