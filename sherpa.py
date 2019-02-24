@@ -1,22 +1,13 @@
-import matplotlib.pyplot as plt
 import requests
-import operator
 import datetime
 from bs4 import BeautifulSoup
-from collections import OrderedDict
 import pandas as pd
-import time
-import numpy as np
-import plotly
-import plotly.offline
-import plotly.graph_objs as go
+
 
 
 
 
 class Sherpa:
-
-
 
     def __init__ (self):
 

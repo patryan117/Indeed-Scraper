@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save_me.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_me.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skill_scraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp-plot.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,10 +24,10 @@
       <file leaf-file-name="sherpa.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sherpa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="170">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
                 <element signature="e#6796#7361#0" />
               </folding>
             </state>
@@ -325,7 +322,7 @@
         <state relative-caret-position="5644">
           <caret line="345" column="38" lean-forward="true" selection-start-line="345" selection-start-column="38" selection-end-line="345" selection-end-column="38" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
             <element signature="e#6796#7361#0" />
           </folding>
         </state>
@@ -419,10 +416,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
             <element signature="e#6796#7361#0" />
           </folding>
         </state>
