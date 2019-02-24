@@ -19,7 +19,6 @@ class Sherpa:
     """A basic web scraper to extract and store daily job posts for a specific job title:
         - Recovers primary fields job title, company, location and job description
         - Adds advanced fields (exact location, FIPS code, skill-phrases)
-        - Scrape should default to the entire united states and jobs posted within 1 day (location="united_states)), (window=1)
     """
 
 
@@ -28,10 +27,6 @@ class Sherpa:
 
         job_df = None
         company_df = None
-
-
-
-
 
 
 
@@ -80,7 +75,6 @@ class Sherpa:
                 except:
                     job_title_list.append("")
 
-
             company_name_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 company = div.find_all(name="span", attrs={"class": "company"})
@@ -92,7 +86,6 @@ class Sherpa:
                     for span in sec_try:
                         company_name_list.append(span.text.strip())
 
-
             # note sponsored posts have a div for location and non sponsored posts have a span
             location_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
@@ -102,7 +95,6 @@ class Sherpa:
                         location_list.append(span.text.strip())
                 except:
                     location_list.append("N/A")
-
 
             salary_list = []
             for td in soup.find_all(name="td", attrs={"class": "snip"}):
@@ -131,29 +123,12 @@ class Sherpa:
 
             post_url_list = []
 
-            job_description_list = []
 
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
                     base_url = (a["href"])
                     post_url = ("http://indeed.com" + str(base_url))
                     post_url_list.append(post_url)
-
-                    # try:
-                    #     post_page = requests.get(post_url)
-                    #     job_soup = BeautifulSoup(post_page.text, "html.parser")
-                    #     job_description = job_soup.find(name="div", attrs={
-                    #         "class": "jobsearch-JobComponent-description icl-u-xs-mt--md"})
-                    #     job_description = str(job_description.get_text().lower())
-                    #     job_description = job_description.replace("\n", " ")
-                    #     job_description_list.append(job_description)
-                    #
-                    # except:
-                    #
-                    #     print(" ERROR PARSING JOB DESCRIPTION \n")
-                    #     job_description_list.append("N/A")
-
-
 
             retrival_date_list = []
             for x in range(len(job_title_list)):
@@ -173,7 +148,7 @@ class Sherpa:
                 'Salary' : salary_list,
                 "Post_Date" : post_date_text_list,
                 'Post_URL' : post_url_list,
-                'Retrival_Date_List' : retrival_date_list
+                'Retrival_Date' : retrival_date_list
                 }
 
             self.temp_df = pd.DataFrame(data=temp)
@@ -187,7 +162,6 @@ class Sherpa:
             print('Removing "Sponsored" Posts...')
             self.main_df = self.main_df.loc[self.main_df['Post_Date'] != "Sponsored"]
             print(self.main_df)
-
 
 
         def scrape_description(url):
@@ -207,9 +181,14 @@ class Sherpa:
                 return None
 
 
-        # 
+        #  apply scrape_description to url column and remove all posts that do not have a reachable description
         self.main_df["Description"] = self.main_df["Post_URL"].apply(scrape_description)
         self.main_df = self.main_df.loc[self.main_df['Post_Date'] != None]
+
+
+    def export_as_csv(self, location=None, name = "sherpa_output.csv"):
+        self.main_df.to_csv(name, index=False)
+
 
 
 
@@ -220,6 +199,7 @@ class Sherpa:
 
 x = Sherpa()
 x.scrape_by_job_title()
+x.export_as_csv()
 
 
 
