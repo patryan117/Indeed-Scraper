@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +13,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Indeed_Scraper$scratch_16.coverage" NAME="scratch_16 Coverage Results" MODIFIED="1549308874555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1551031328061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1551627056084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$test.coverage" NAME="test Coverage Results" MODIFIED="1532041782326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549368705546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$scratch_17.coverage" NAME="scratch_17 Coverage Results" MODIFIED="1551022704240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
@@ -25,10 +24,10 @@
         <entry file="file://$PROJECT_DIR$/sherpa.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <element signature="e#6796#7361#0" />
+                <marker date="1551627419341" expanded="true" signature="126:136" ph="..." />
               </folding>
             </state>
           </provider>
@@ -282,9 +281,9 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.100995734" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32859176" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20483641" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25035563" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32859176" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13749161" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13749161" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -323,7 +322,7 @@
           <caret line="345" column="38" lean-forward="true" selection-start-line="345" selection-start-column="38" selection-end-line="345" selection-end-column="38" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#6796#7361#0" />
+            <marker date="1551627419341" expanded="true" signature="126:136" ph="..." />
           </folding>
         </state>
       </provider>
@@ -390,9 +389,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sherpa_output.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/save_me.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="477">
@@ -414,13 +410,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sherpa_output.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <element signature="e#6796#7361#0" />
+            <marker date="1551627419341" expanded="true" signature="126:136" ph="..." />
           </folding>
         </state>
       </provider>

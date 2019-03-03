@@ -11,20 +11,23 @@ class Sherpa:
 
     def __init__ (self):
 
-        job_df = None
-        company_df = None
+
 
 
 
     def scrape_by_job_title(self,
-                            searched_job_title="data analyst",
+                            searched_job_title="data engineer",
                             job_location="Boston, MA",
                             num_pages=2,
                             skip_sponsored = True,
+                            full_time_only = True,
                             exact_matching = True,
                             max_date_limiter = 1,
+                            exclude_staffing_agencies = True,
+                            distance_range = "exact",
                             ):
 
+        # instancialize
         self.main_df = pd.DataFrame()
         self.search_title = searched_job_title
         self.skip_sponsored = skip_sponsored
@@ -185,8 +188,11 @@ class Sherpa:
 #########################################################
 
 x = Sherpa()
-x.scrape_by_job_title()
-x.export_as_csv()
+x.scrape_by_job_title()   # converts search query to pd dataframe
+x.export_as_csv()         # exports as local csv
+# x.export_to_database(database_name)     #exports to database (requires all enhanced analytics bools to be True )
+
+
 
 
 
