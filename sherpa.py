@@ -1,5 +1,6 @@
 import requests
 import datetime
+import inspect
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -11,7 +12,8 @@ class Sherpa:
 
     def __init__ (self):
 
-
+        job_df = None
+        company_df = None
 
 
 
@@ -36,6 +38,8 @@ class Sherpa:
 
         # TODO refactor with f{} and incorporate additional parameters
         print("\nSearching for '" + searched_job_title + "' jobs in the '" + job_location + "' area...\n")
+        # print(inspect.signature(self.scrape_by_job_title()))
+
 
         formatted_job_title = searched_job_title.replace(" ", "+")
         formatted_job_location = job_location.replace(" ", "+")\
@@ -190,6 +194,7 @@ class Sherpa:
 x = Sherpa()
 x.scrape_by_job_title()   # converts search query to pd dataframe
 x.export_as_csv()         # exports as local csv
+x.descriptions_to_tf_idf()  # takes the
 # x.export_to_database(database_name)     #exports to database (requires all enhanced analytics bools to be True )
 
 
