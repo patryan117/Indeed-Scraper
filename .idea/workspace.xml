@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/tf_idf_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sherpa_output.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa_output.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tf_idf_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tf_idf_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +16,7 @@
     <SUITE FILE_PATH="coverage/Indeed_Scraper$scratch_16.coverage" NAME="scratch_16 Coverage Results" MODIFIED="1549308874555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$sherpa.coverage" NAME="sherpa Coverage Results" MODIFIED="1551627673314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$test.coverage" NAME="test Coverage Results" MODIFIED="1532041782326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Indeed_Scraper$tf_idf_test.coverage" NAME="tf_idf_test Coverage Results" MODIFIED="1551631059933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Indeed_Scraper$tf_idf_test.coverage" NAME="tf_idf_test Coverage Results" MODIFIED="1551637110767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$skill_scraper.coverage" NAME="skill_scraper Coverage Results" MODIFIED="1549368705546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Indeed_Scraper$scratch_17.coverage" NAME="scratch_17 Coverage Results" MODIFIED="1551022704240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
   </component>
@@ -39,11 +37,20 @@
       <file leaf-file-name="tf_idf_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tf_idf_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="102">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
               <folding>
-                <element signature="e#3#22#0" expanded="true" />
+                <element signature="e#2#21#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="text.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/feature_extraction/text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="231" selection-start-line="231" selection-end-line="231" />
             </state>
           </provider>
         </entry>
@@ -84,6 +91,7 @@
       <find>lower</find>
       <find>temp_job</find>
       <find>Description</find>
+      <find>]</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,10 +119,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-15" />
-    <option name="width" value="1950" />
-    <option name="height" value="2075" />
+  <component name="ProjectFrameBounds">
+    <option name="width" value="3840" />
+    <option name="height" value="2060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -289,17 +296,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <frame x="0" y="0" width="1536" height="824" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32859176" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5006766" side_tool="true" weight="0.52028984" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.100995734" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.46514937" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45234707" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.46408045" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993234" visible="true" weight="0.52028984" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32859176" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13749161" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1285521" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -438,12 +445,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/feature_extraction/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="231" selection-start-line="231" selection-end-line="231" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tf_idf_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="102">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
           <folding>
-            <element signature="e#3#22#0" expanded="true" />
+            <element signature="e#2#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
