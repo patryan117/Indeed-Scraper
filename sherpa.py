@@ -36,6 +36,7 @@ class Sherpa:
 
 
 
+
         # TODO refactor with f{} and incorporate additional parameters
         print("\nSearching for '" + searched_job_title + "' jobs in the '" + job_location + "' area...\n")
         # print(inspect.signature(self.scrape_by_job_title()))
@@ -55,6 +56,10 @@ class Sherpa:
             counter = page * 10  # counter to increment the searches displayed per page (double check)
             url = "https://www.indeed.com/jobs?q=" + str(formatted_job_title) + "&l=" + str(formatted_job_location) + "&start=" + str(counter)
             print("\nSearching Page: " + "(" + str(page + 1) + ")" + "\n" + url + "\n")
+
+            url = "https://www.indeed.com/jobs?as_and=data+scientist&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=0&l=&fromage=1&limit=50&sort=&psf=advsrch"
+
+
 
             page = requests.get(url)
             soup = BeautifulSoup(page.text, "html.parser")
@@ -180,6 +185,9 @@ class Sherpa:
         self.main_df = self.main_df.loc[self.main_df['Post_Date'] != None]
 
 
+
+
+
     def export_as_csv(self, location=None, name = "sherpa_output.csv"):
         self.main_df.to_csv(name, index=False)
 
@@ -194,8 +202,9 @@ class Sherpa:
 x = Sherpa()
 x.scrape_by_job_title()   # converts search query to pd dataframe
 x.export_as_csv()         # exports as local csv
-x.descriptions_to_tf_idf()  # takes the
-# x.export_to_database(database_name)     #exports to database (requires all enhanced analytics bools to be True )
+x.descriptions_to_tf_idf()  # identifies the most "significant" words in the descriptions corpus
+# x.dump_to_database(database_name, database_location)     #exports to database (requires all enhanced analytics bools to be True)
+
 
 
 
