@@ -3,10 +3,11 @@ import datetime
 import inspect
 from bs4 import BeautifulSoup
 import pandas as pd
+import pymongo
+import json
+from bson import json_util
 
-
-
-
+from pymongo import MongoClient
 
 class Sherpa:
 
@@ -22,12 +23,18 @@ class Sherpa:
                             job_location="Boston, MA",
                             num_pages=2,
                             skip_sponsored = True,
+                            posts_per_page = 50,
                             full_time_only = True,
                             exact_matching = True,
                             max_date_limiter = 1,
+                            job_type_constraint = "full_time",
+
                             exclude_staffing_agencies = True,
                             distance_range = "exact",
                             ):
+
+                            # hypothetically you could decend through salary ranges to obtain indeed's salary estimates
+
 
         # instancialize
         self.main_df = pd.DataFrame()
@@ -57,7 +64,7 @@ class Sherpa:
             url = "https://www.indeed.com/jobs?q=" + str(formatted_job_title) + "&l=" + str(formatted_job_location) + "&start=" + str(counter)
             print("\nSearching Page: " + "(" + str(page + 1) + ")" + "\n" + url + "\n")
 
-            url = "https://www.indeed.com/jobs?as_and=data+scientist&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=0&l=&fromage=1&limit=50&sort=&psf=advsrch"
+            # url = "https://www.indeed.com/jobs?as_and=data+scientist&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=0&l=&fromage=1&limit=50&sort=&psf=advsrch"
 
 
 
@@ -74,6 +81,7 @@ class Sherpa:
                 except:
                     job_title_list.append("")
 
+
             company_name_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
                 company = div.find_all(name="span", attrs={"class": "company"})
@@ -85,6 +93,7 @@ class Sherpa:
                     for span in sec_try:
                         company_name_list.append(span.text.strip())
 
+
             # note sponsored posts have a div for location and non sponsored posts have a span
             location_list = []
             for div in soup.find_all(name="div", attrs={"class": "row"}):
@@ -94,6 +103,7 @@ class Sherpa:
                         location_list.append(span.text.strip())
                 except:
                     location_list.append("N/A")
+
 
             salary_list = []
             for td in soup.find_all(name="td", attrs={"class": "snip"}):
@@ -188,10 +198,28 @@ class Sherpa:
 
 
 
-    def export_as_csv(self, location=None, name = "sherpa_output.csv"):
+    def save_df_as_csv(self, location=None, name ="sherpa_output.csv"):
         self.main_df.to_csv(name, index=False)
 
 
+
+    def df_to_json(self, location = None, name = "sherpa_output.json"):
+        out_json=self.main_df.to_json(orient='records')
+        print(out_json)
+        return (out_json)
+
+
+    def save_df_as_json(self, location = None, name = "sherpa_output.json"):
+        with open(name, 'w') as file:
+            json.dump(self.df_to_json(), file)
+
+
+    def dump_to_mongo(self, ):
+        client = MongoClient('localhost', 27017)
+        db = client['sherpa']
+        posts = db['posts']
+        print(posts.find_one({}))
+        data = json_util.loads(self.save_df_as_json().read())
 
 
 
@@ -200,21 +228,13 @@ class Sherpa:
 #########################################################
 
 x = Sherpa()
-x.scrape_by_job_title()   # converts search query to pd dataframe
-x.export_as_csv()         # exports as local csv
-x.descriptions_to_tf_idf()  # identifies the most "significant" words in the descriptions corpus
-# x.dump_to_database(database_name, database_location)     #exports to database (requires all enhanced analytics bools to be True)
+x.scrape_by_job_title()   # scrapes search query parameters from indeed to pd dataframe
+x.save_df_as_json()           # converts current pd dataframe to locally saved json file
 
+# working
+# x.save_df_as_csv()         # converts current pd dataframe  to locally saved csv file
 
-
-
-
-
-
-
-
-
-
-
-
+#TODO
+# x.dump_to_mongo(db_name, collection_name, database_location)     #exports to database (requires all enhanced analytics bools to be True)
+# x.descriptions_to_tf_idf()  # identifies the most "significant" words in the descriptions corpus (saves instance object array)
 
