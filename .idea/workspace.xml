@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sherpa_output.json" beforeDir="false" afterPath="$PROJECT_DIR$/sherpa_output.json" afterDir="false" />
-    </list>
+    <list default="true" id="3f0d88d3-ae6d-4eb6-887f-0fdf6f188e22" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/sherpa.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="196">
-              <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+              <caret line="178" column="32" selection-start-line="178" selection-start-column="32" selection-end-line="178" selection-end-column="32" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -131,8 +128,8 @@
       <find>print</find>
       <find>print(job</find>
       <find>plot</find>
-      <find>excel</find>
-      <find>r</find>
+      <find />
+      <find />
       <find>date</find>
       <find>days</find>
       <find>lower</find>
@@ -156,6 +153,7 @@
         <option value="$PROJECT_DIR$/db_test.py" />
         <option value="$PROJECT_DIR$/skill_lists.py" />
         <option value="$PROJECT_DIR$/sherpa.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_18.py" />
       </list>
     </option>
   </component>
@@ -345,7 +343,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1536" height="824" extended-state="0" />
+    <frame x="0" y="0" width="1536" height="824" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32753623" />
@@ -353,7 +351,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.100995734" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.46376812" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993234" visible="true" weight="0.51304346" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993234" visible="true" weight="0.22463769" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32859176" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1285521" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -556,10 +554,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_18.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/sherpa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
-          <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+          <caret line="178" column="32" selection-start-line="178" selection-start-column="32" selection-end-line="178" selection-end-column="32" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
