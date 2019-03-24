@@ -1,11 +1,10 @@
 import requests
 import datetime
-import inspect
 from bs4 import BeautifulSoup
 import pandas as pd
-import pymongo
 import json
 from bson import json_util
+import bson
 
 from pymongo import MongoClient
 
@@ -20,7 +19,7 @@ class Sherpa:
 
     def scrape_by_job_title(self,
                             searched_job_title="data engineer",
-                            job_location="Boston, MA",
+                            job_location="Las Vegas, NV",
                             num_pages=2,
                             skip_sponsored = True,
                             posts_per_page = 50,
@@ -205,7 +204,6 @@ class Sherpa:
 
     def df_to_json(self, location = None, name = "sherpa_output.json"):
         out_json=self.main_df.to_json(orient='records')
-        print(out_json)
         return (out_json)
 
 
@@ -214,12 +212,14 @@ class Sherpa:
             json.dump(self.df_to_json(), file)
 
 
-    def dump_to_mongo(self, ):
+    def dump_to_mongo(self, db_name = "sherpa", collection_name = "posts"):
         client = MongoClient('localhost', 27017)
-        db = client['sherpa']
-        posts = db['posts']
-        print(posts.find_one({}))
-        data = json_util.loads(self.save_df_as_json().read())
+        db = client[db_name]
+        table = db[collection_name]
+
+        data = self.df_to_json()
+        data = bson.json_util.loads(data)
+        table.insert_many(data)
 
 
 
@@ -230,11 +230,10 @@ class Sherpa:
 x = Sherpa()
 x.scrape_by_job_title()   # scrapes search query parameters from indeed to pd dataframe
 x.save_df_as_json()           # converts current pd dataframe to locally saved json file
-
-# working
+x.dump_to_mongo()         # dumps to local mongo data base (taking db and collection name)
 # x.save_df_as_csv()         # converts current pd dataframe  to locally saved csv file
 
+
 #TODO
-# x.dump_to_mongo(db_name, collection_name, database_location)     #exports to database (requires all enhanced analytics bools to be True)
 # x.descriptions_to_tf_idf()  # identifies the most "significant" words in the descriptions corpus (saves instance object array)
 
