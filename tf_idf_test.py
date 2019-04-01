@@ -5,7 +5,8 @@ import pandas as pd
 #TODO pad each string with spaces so that java wont throw True for javascript and java.  "java" -> " java ".
 import re
 import nltk
-import numpy
+import numpy as np
+np.set_printoptions(threshold=np.inf)
 import math
 
 
@@ -102,31 +103,91 @@ for x in tf_dict_list:
 print()
 
 
-# # ln (total number of documents, number of occourences of i word)
+# # ln (total number of documents/ number of documents with the word i in it)
 
 def get_idf_dict(tok_docs_list, top_bow_dict):
 
+
     num_docs = len(tok_docs_list)
     idf_dict = {}
+
     for num in range(len(top_bow_dict)):
         counter = 0
+
         for doc in tok_docs_list:
-            counter += doc.count(top_bow_dict[num])
-        idf_dict[num] = math.log10(num_docs / float(counter))
+            if top_bow_dict[num] in doc:
+                counter += 1
+
+        idf_dict[num] = math.log10((1+num_docs) / (1+float(counter)))
+
     return idf_dict
 
 idf_dict = get_idf_dict(tokenized_descriptions_list, top_bow_dict)
-print(idf_dict)
 
 
 
 
 # convert tf_dict to list:
 idf_list = []
-for x in range(len(idf_dict)):
-    idf_list.append(idf_dict[x])
+for i in range(len(idf_dict)):
+    idf_list.append(idf_dict[i])
 
-print(idf_list)
+# print(idf_list)
+
+# convert tf_dict_list to tf_list (2d array)
+tf_list = []
+for i in range(len(tf_dict_list)):
+    dict = tf_dict_list[i]
+    temp_list = []
+    for j in range(len(dict)):
+        temp_list.append(dict[j])
+    tf_list.append(temp_list)
+# print(tf_list)
+
+
+for x in tf_list:
+    print(x)
+
+# convert to np arrays
+tf_list = np.array(tf_list)
+idf_list = np.array(idf_list)
+
+print("tf size", tf_list.size)
+print("idf_size", idf_list.size)
+
+tfidf_list =   tf_list * idf_list
+print()
+
+
+def get_top_words_list_per_doc(tfidf_list, top_bow_dict ):
+    tfidf_list = tfidf_list.tolist()
+    out_list = []
+
+    for doc in tfidf_list:
+        word_list = []
+
+        for word in range(len(doc)):
+            max_val_index = max(range(len(doc)), key=doc.__getitem__)
+            doc.pop(max_val_index)
+            top_word = top_bow_dict[max_val_index]
+            word_list.append(top_word)
+
+        out_list.append(word_list)
+    return out_list
+
+
+
+top_words = (get_top_words_list_per_doc(tfidf_list, top_bow_dict))
+
+
+for x in top_words:
+    print(x)
+
+
+
+
+
+
 
 
 
